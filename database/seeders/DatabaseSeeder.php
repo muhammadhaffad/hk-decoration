@@ -31,21 +31,19 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'superadmin'
         ]);
-        Category::create([
-            'nama' => 'Backdrop papan'
+        Category::insert([
+            ['nama' => 'Backdrop papan'], 
+            ['nama' => 'Backdrop tirai']
         ]);
-        Category::create([
-            'nama' => 'Backdrop tirai'
-        ]);
-        for ($i=0; $i < 10; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             Decorationpacket::create([
                 'category_id' => 1,
-                'nama' => 'Paket dekorasi '.$i,
+                'nama' => 'Paket dekorasi ' . $i,
                 'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus quisquam nulla temporibus facere ut cum omnis voluptate facilis optio culpa necessitatibus numquam possimus, itaque eum explicabo, quaerat vel ad asperiores laboriosam aperiam corporis animi perferendis eius modi? Ipsum dolorem quos illum harum earum corporis rem optio, ratione id cum repudiandae rerum laboriosam eum! Beatae error eveniet iure, cum unde, expedita nemo soluta sit molestiae, veritatis maiores mollitia corrupti. Perspiciatis iusto et explicabo possimus neque dolorum quaerat veniam obcaecati nisi, incidunt cum at dolorem sit est tempora sed eum sequi aspernatur voluptates commodi impedit fugit. At inventore ut quos corrupti eveniet!',
                 'harga' => 300000,
                 'stok' => 10,
                 'jmldisewa' => 0,
-                'gambar' => 'image.png'
+                'gambar' => $i . '.jpg'
             ]);
         }
 
@@ -73,7 +71,7 @@ class DatabaseSeeder extends Seeder
             'jmldisewa' => 0,
             'gambar' => 'image.png'
         ]);
-        
+
         Sessionpackage::create([
             'nama' => 'Sesi paket I',
             'keterangan' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus quisquam nulla temporibus facere ut cum omnis voluptate facilis optio culpa necessitatibus numquam possimus, itaque eum explicabo, quaerat vel ad asperiores laboriosam aperiam corporis animi perferendis eius modi? Ipsum dolorem quos illum harum earum corporis rem optio, ratione id cum repudiandae rerum laboriosam eum! Beatae error eveniet iure, cum unde, expedita nemo soluta sit molestiae, veritatis maiores mollitia corrupti. Perspiciatis iusto et explicabo possimus neque dolorum quaerat veniam obcaecati nisi, incidunt cum at dolorem sit est tempora sed eum sequi aspernatur voluptates commodi impedit fugit. At inventore ut quos corrupti eveniet!',
