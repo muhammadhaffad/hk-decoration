@@ -1,0 +1,127 @@
+<nav id="sidebarMenu" class="col-md-3 pb-3 col-lg-2 d-md-block bg-light sidebar collapse overflow-auto" style="min-width: 250px;">
+    <div class="position-sticky mt-3">
+        <ul class="nav flex-column fs-6">
+            @if(auth()->user()->role == 'superadmin')
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1 text-muted">
+                <span>Akun</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/employee')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.employee')}}">
+                    <i class="bi bi-people"></i>
+                    Admin
+                </a>
+            </li>
+            @endif
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Laporan</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/report/monthly')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.report.monthly')}}">
+                    <i class="bi bi-calendar-month"></i>
+                    Bulanan
+                </a>
+            </li>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Pengembalian</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/return')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.return')}}">
+                    <i class="bi bi-arrow-return-right"></i>
+                    Konfirmasi
+                </a>
+            </li>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Pemesanan</span>
+                <a class="collapsed text-muted" data-bs-toggle="collapse" href="#pemesanan">
+                    <i class="bi bi-plus-circle fs-6"></i>
+                </a>
+            </h6>
+            <div id="pemesanan" class="collapse">
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/confirmation')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.confirmation') . '?status=Belum dikonfirmasi'}}">
+                        <i class="bi bi-check2-square"></i>
+                        Konfirmasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/unpaid')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.unpaid')}}">
+                        <i class="bi bi-list-ul"></i>
+                        Belum bayar
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/bank')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.bank')}}">
+                        <i class="bi bi-credit-card-2-front"></i>
+                        Bank
+                    </a>
+                </li>
+            </div>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Produk</span>
+                <a class="collapsed text-muted" data-bs-toggle="collapse" href="#produk">
+                    <i class="bi bi-plus-circle fs-6"></i>
+                </a>
+            </h6>
+            <div id="produk" class="collapse">
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/decoration-packet')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.decoration-packet')}}">
+                        <i class="bi bi-bag-plus"></i>
+                        Paket Dekorasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/decoration-item')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.decoration-item')}}">
+                        <i class="bi bi-bag-plus"></i>
+                        Item Tambahan Dekorasi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ (request()->is('admin/session-package')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.session-package')}}">
+                        <i class="bi bi-camera"></i>
+                        Paket Sesi
+                    </a>
+                </li>
+            </div>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Pengiriman</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/shipping')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.shipping')}}">
+                    <i class="bi bi-truck"></i>
+                    Ongkir
+                </a>
+            </li>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Halaman</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/home-page*')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.home-page')}}">
+                    <i class="bi bi-newspaper"></i>
+                    Beranda
+                </a>
+            </li>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-2 mb-1 text-muted">
+                <span>Gambar</span>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('admin/gallery*')) ? 'active' : '' }}" aria-current="page" href="{{route('admin.gallery')}}">
+                    <i class="bi bi-images"></i>
+                    Galeri
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script>
+    $('.collapsed').on('click', function() {
+        $(this).find('i')
+            .toggleClass('bi bi-plus-circle')
+            .toggleClass('bi bi-dash-circle')
+    });
+    $(document).ready(function() {
+        $('.collapse').has('a.nav-link.active').each(function() {
+            $(this).addClass('show');
+            $(this).prev().find('i').toggleClass('bi bi-plus-circle').toggleClass('bi bi-dash-circle');
+        });
+    })
+</script>
