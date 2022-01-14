@@ -30,7 +30,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown07XL">
             <li><a class="dropdown-item" href="/profile">Profile</a></li>
-            <li><a class="dropdown-item" href="/chat">Pesan</a></li>
+            <li><a class="dropdown-item" href="/chat">Message</a></li>
             <li><a class="dropdown-item" href="/cart">Cart</a></li>
             <li><a class="dropdown-item" href="/myorder">My order</a></li>
             <li><hr class="dropdown-divider"></li>
