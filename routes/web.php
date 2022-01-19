@@ -98,7 +98,7 @@ Route::post('/receipt', [ReceiptController::class, 'view'])->name('receipt')->mi
 Route::get('/chat', [ChatController::class, 'index'])->name('chat')->middleware('role:user');
 Route::post('/chat/send', [ChatController::class, 'store'])->name('chat.send')->middleware('role:user');
 
-Route::get('/tripay/callback', [TripayCallbackController::class, 'handler']);
+Route::get('/tripay/callback', [TripayCallbackController::class, 'handle']);
 
 Route::get('/login', function () {
     return view('login');

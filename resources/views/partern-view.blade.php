@@ -102,9 +102,12 @@ use Illuminate\Support\Str;
         <div class="p-3">
             <div class="d-flex justify-content-between">
                 <h4 style="line-height: 1;">ULASAN KUSTOMER</h4>
+                @if(isset(auth()->user()->id))
                 <button class="btn btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#submitReview" aria-expanded="false" aria-controls="collapseExample">BUAT ULASAN</button>
+                @endif
             </div>
             <hr>
+            @if(isset(auth()->user()->id))
             <div id="submitReview" class="collapse">
                 <form method="post" action="" enctype="multipart/form-data">
                     @csrf
@@ -120,6 +123,7 @@ use Illuminate\Support\Str;
                 </form>
                 <hr>
             </div>
+            @endif
             @foreach($sessionpackage->testimonials()->get() as $testimonial)
             <div class="reviewCustomer">
                 <div class="d-flex">

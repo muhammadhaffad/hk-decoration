@@ -120,8 +120,8 @@ use Illuminate\Support\Str;
                         <small>
                             <div class="text-muted mt-2 d-flex">
                                 stok:
-                                <div id="stok" tersedia="{{$decoration->stok-$decoration->jmldisewa}}" class="ms-1">{{$decoration->stok}}</div>
-                                , tersedia: {{$decoration->stok-$decoration->jmldisewa}}
+                                <div id="stok" tersedia="{{($decoration->stok-$decoration->jmldisewa >= 0) ? $decoration->stok-$decoration->jmldisewa :'0'}}" class="ms-1">{{$decoration->stok}}</div>
+                                , tersedia: {{($decoration->stok-$decoration->jmldisewa >= 0) ? $decoration->stok-$decoration->jmldisewa :'0'}}
                             </div>
                         </small>
                     </div>

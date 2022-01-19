@@ -34,6 +34,7 @@ class OrderController extends Controller
     {
         $order = Order::where('user_id', auth()->user()->id);
         $order = $order->with(['orderitems'])->where('kodeSewa', $code)->first();
+        // lihat detail transaksi di tripay
         $transaction = new TripayTransaction();
         $transaction = $transaction->detailTransaction($code);
         return view('myorder-view', [
@@ -44,23 +45,30 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
+        // validasi input
         $request->validate([
             'method' => 'required',
             'bayar' => 'required'
         ]);
+        // cek data di table checkout
         $order = Checkout::where('user_id', auth()->user()->id)->first();
         if (!$order) {
             return back();
         }
+        // get data dari table cart berdasarkan kolom items di table checkout
         $items = Cart::find(explode(',', $order->items));
+
         $this->__checkCollision($items, $order);
 
+        // request transaksi ke web tripay
         $transaction = new TripayTransaction();
         $transaction = $transaction->transaction($order, $request->method, $items, $order->bayar);
+        // cek request transaksi berhasil atau tidak
         if (!$transaction->success) {
            return back(); 
         }
 
+        // input ke database
         $kode = $transaction->data->reference;
         $neworder = new Order;
         $neworder->user_id = Auth::user()->id; //Auth::user()->id;

@@ -81,7 +81,7 @@ use Illuminate\Support\Str;
                             <div class="d-flex align-items-center">
                                 <input class="rating me-1" name="rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5" style="--value:{{$rating}}" type="range" value="{{$rating}}" required> <u>{{$review}} REVIEW</u>
                             </div>
-                            <p class="mt-0 mb-0" id="stokProduk">Tersedia: {{$decoration->stok - $decoration->jmldisewa}}</p>
+                            <p class="mt-0 mb-0" id="stokProduk">Tersedia: {{($decoration->stok-$decoration->jmldisewa >= 0) ? $decoration->stok-$decoration->jmldisewa :'0'}}</p>
                             <small class="text-danger">*Penyewaan diatas batas tersedia akan dicek berdasarkan tanggal penyewaan</small>
                             <div class="p-2 bg-primary my-4">
                                 <h2 class="mb-0 text-white" id="hargaProduk">@currency($decoration->harga)</h2>
@@ -132,9 +132,12 @@ use Illuminate\Support\Str;
         <div class="p-3">
             <div class="d-flex justify-content-between">
                 <h4 style="line-height: 1;">ULASAN KUSTOMER</h4>
+                @if(isset(auth()->user()->id))
                 <button class="btn btn-outline-dark" data-bs-toggle="collapse" data-bs-target="#submitReview" aria-expanded="false" aria-controls="collapseExample">BUAT ULASAN</button>
+                @endif
             </div>
             <hr>
+            @if(isset(auth()->user()->id))
             <div id="submitReview" class="collapse">
                 <form method="post" action="" enctype="multipart/form-data">
                     @csrf
@@ -150,6 +153,7 @@ use Illuminate\Support\Str;
                 </form>
                 <hr>
             </div>
+            @endif
             @foreach($decoration->testimonials()->get() as $testimonial)
             <div class="reviewCustomer">
                 <div class="d-flex">
