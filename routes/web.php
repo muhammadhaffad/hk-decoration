@@ -98,7 +98,7 @@ Route::post('/receipt', [ReceiptController::class, 'view'])->name('receipt')->mi
 Route::get('/chat', [ChatController::class, 'index'])->name('chat')->middleware('role:user');
 Route::post('/chat/send', [ChatController::class, 'store'])->name('chat.send')->middleware('role:user');
 
-Route::get('/tripay/callback', [TripayCallbackController::class, 'handle']);
+Route::post('/tripay/callback', [TripayCallbackController::class, 'handle']);
 
 Route::get('/login', function () {
     return view('login');
@@ -124,6 +124,8 @@ Route::post('admin/login', [AdminController::class, 'login']);
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware('role:superadmin,admin')->group(function () {
     // new admin view
     Route::get('/dashboard', [DashboardController::class, 'view'])->name('admin.dashboard');
+    Route::get('/dashboard/charts/monthly/incomes', [DashboardController::class, 'income'])->name('admin.dashboard.charts.monthly-incomes');
+    Route::get('/dashboard/charts/monthly/orders', [DashboardController::class, 'order'])->name('admin.dashboard.charts.monthly-orders');
 
     Route::get('/order', [ConfirmationController::class, 'detailOrder'])->name('admin.detail-order');
 

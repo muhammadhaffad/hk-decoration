@@ -24,7 +24,7 @@ class ReportExport implements FromView, WithEvents, ShouldAutoSize
         $Y = $date[0];
         $m = $date[1];
         return view('admin.exports.report', [
-            'orders' => Order::with('orderitems')->where('status', 'unpaid')->whereMonth('tanggalTransaksi', '=', $m)->whereYear('tanggalTransaksi', '=', $Y)->get()
+            'orders' => Order::with('orderitems')->where('status', 'paid')->whereMonth('tanggalTransaksi', '=', $m)->whereYear('tanggalTransaksi', '=', $Y)->get()
         ]);
     }
     public function registerEvents(): array

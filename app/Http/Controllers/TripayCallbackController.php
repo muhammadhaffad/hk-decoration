@@ -26,7 +26,7 @@ class TripayCallbackController extends Controller
         }
 
         $data = json_decode($json);
-        $merchantRef = $data->merchant_ref;
+        $merchantRef = $data->reference;
 
         $order = Order::where('kodeSewa', $merchantRef)
             ->where('status', 'unpaid')
